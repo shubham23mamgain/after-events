@@ -4,10 +4,16 @@ import { Grid, Button } from "semantic-ui-react";
 import EventList from "../EventList/EventList";
 import EventForm from "../EventForm/EventForm";
 import uuid from "react-uuid";
-
+import { createEvent, updateEvent, deleteEvent } from "../eventActions";
 const mapStateToProps = (state) => ({
   events: state.events,
 });
+
+const actions = {
+  createEvent,
+  deleteEvent,
+  updateEvent,
+};
 
 class EventDashboard extends Component {
   state = {
@@ -18,8 +24,8 @@ class EventDashboard extends Component {
   handleCreateEvent = (newEvent) => {
     newEvent.id = uuid();
     newEvent.hostPhotoURL = "./assets/user.png";
+    this.props.createEvent(newEvent);
     this.setState({
-      events: [...this.state.events, newEvent],
       isOpen: false,
       selectedEvent: null,
     });
@@ -33,23 +39,15 @@ class EventDashboard extends Component {
   };
 
   handleUpdateEvent = (updatedEvent) => {
+    this.props.updateEvent(updatedEvent);
     this.setState(({ events }) => ({
-      events: events.map((event) => {
-        if (event.id === updatedEvent.id) {
-          return { ...updatedEvent };
-        } else {
-          return event;
-        }
-      }),
       isOpen: false,
       selectedEvent: null,
     }));
   };
 
   handleDeleteEvent = (id) => {
-    this.setState(({ events }) => ({
-      events: events.filter((e) => e.id !== id),
-    }));
+    this.props.deleteEvent(id);
   };
 
   handleCreateFormOpen = () => {
@@ -97,4 +95,4 @@ class EventDashboard extends Component {
   }
 }
 
-export default connect(mapStateToProps)(EventDashboard);
+export default connect(mapStateToProps, actions)(EventDashboard);

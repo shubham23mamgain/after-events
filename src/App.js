@@ -5,7 +5,7 @@ import EventDashboard from "./features/event/EventDashboard/EventDashboard";
 import Navbar from "./features/nav/Navbar/Navbar";
 import { Container } from "semantic-ui-react";
 import Home from "./features/home/Home";
-import { EventDetailedPage } from "./features/event/EventDetailed/EventDetailedPage";
+import EventDetailedPage from "./features/event/EventDetailed/EventDetailedPage";
 import UserDetailedPage from "./features/user/UserDetailed/UserDetailedPage";
 import PeopleDashboard from "./features/user/PeopleDashboard/PeopleDashboard";
 import SettingsDashboard from "./features/user/Settings/SettingsDashboardPage";
